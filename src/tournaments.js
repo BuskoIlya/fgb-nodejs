@@ -1,71 +1,46 @@
-const util = require("./util.js");
+const item = {
+  photo: "2022-03-20-minsk-cup_288-192.jpg",
+  title: "Кубок Минска",
+  ref: "minsk-cup-2022-03-20",
+  date: "2022-03-20",
+  address: "КГС, белорусская комната",
+  author: "Грунковский Ю.А."
+}
+const tournaments2022 = [];
+const tournaments2021 = [];
+const tournaments2020 = [];
+const tournaments2019 = [];
+const tournaments2018 = [];
+
+for (let i = 0; i < 10; i++) {
+  tournaments2022.push(item);
+  tournaments2021.push(item);
+  tournaments2020.push(item);
+  tournaments2019.push(item);
+  tournaments2018.push(item);
+}
 
 const tournaments = [
   {
-    photo: "2022-03-20-minsk-cup_288-192.jpg",
-    title: "Кубок Минска",
-    ref: "minsk-cup-2022-03-20",
-    date: "2022-03-20",
-    author: "Грунковский Ю.А.",
-    address: "КГС, белорусская комната"
+    year: "2022",
+    items: tournaments2022
   },
   {
-    photo: "2022-04-02-black-pawn_288-192.jpg",
-    title: "Чёрная пешка",
-    ref: "black-pawn-2022-04-02",
-    date: "2022-04-02",
-    author: "Грунковский Ю.А.",
-    address: "Брест, ул. Московская 151"
+    year: "2021",
+    items: tournaments2021
   },
   {
-    photo: "2022-04-23-clever-stork-1_288-192.jpg",
-    title: "Умный Аист. Тур 1",
-    ref: "clever-stork-1-2022-04-23",
-    date: "2022-04-23",
-    author: "Бусько И.В., Грунковский Ю.А.",
-    address: "КГС, белорусская комната"
+    year: "2020",
+    items: tournaments2020
   },
   {
-    photo: "2022-04-29-cheerful-stream_288-192.jpg",
-    title: "Весёлый ручей",
-    ref: "cheerful-stream-2022-04-29",
-    date: "2022-04-29",
-    author: "Грунковский Ю.А.",
-    address: "Минск, МДДМ"
+    year: "2019",
+    items: tournaments2019
   },
   {
-    photo: "2022-05-14-clever-stork-2_288-192.jpg",
-    title: "Умный Аист. Тур 2",
-    ref: "clever-stork-1-2022-05-14",
-    date: "2022-05-14",
-    author: "Бусько И.В., Грунковский Ю.А.",
-    address: "КГС, белорусская комната"
-  },
-  {
-    photo: "2022-05-20-by-junior-championship_288-192.jpg",
-    title: "Юношеский чемпионат Беларуси",
-    ref: "cheerful-stream-2022-05-20",
-    date: "2022-05-20",
-    author: "Грунковский Ю.А.",
-    address: "Минск, МДДМ"
-  },
-  {
-    photo: "2022-11-04-autumn-leaf_288-192.jpg",
-    title: "Осенний лист",
-    ref: "autumn-leaf-2022-11-04",
-    date: "2022-11-04",
-    author: "Грунковский Ю.А.",
-    address: "Минск, МДДМ"
-  },
-  {
-    photo: "2022-11-19-by-championship_288-192.jpg",
-    title: "Чемпионат Беларуси",
-    ref: "by-championship-2022-11-19",
-    date: "2022-11-19",
-    author: "Грунковский Ю.А.",
-    address: "КГС, белорусская комната"
+    year: "2018",
+    items: tournaments2018
   }
-]
+];
 
-tournaments.sort(util.decreaseByStrField("date"));
 module.exports = tournaments;
