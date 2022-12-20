@@ -15,6 +15,10 @@ const euCommand1920A = require("./src/eu_command_19-20_A.js");
 const euCommand1920B = require("./src/eu_command_19-20_B.js");
 const euCommand1920C = require("./src/eu_command_19-20_C.js");
 const euCommand1920D = require("./src/eu_command_19-20_D.js");
+const euCommand2021A = require("./src/eu_command_20-21_A.js");
+const euCommand2021B = require("./src/eu_command_20-21_B.js");
+const euCommand2021C = require("./src/eu_command_20-21_C.js");
+const euCommand2021D = require("./src/eu_command_20-21_D.js");
 
 const app = express();
 app.use(cors());
@@ -32,5 +36,9 @@ app.get(process.env.API_EU_COMMAND_19_20_A, function (req, res) { res.json(euCom
 app.get(process.env.API_EU_COMMAND_19_20_B, function (req, res) { res.json(euCommand1920B) });
 app.get(process.env.API_EU_COMMAND_19_20_C, function (req, res) { res.json(euCommand1920C) });
 app.get(process.env.API_EU_COMMAND_19_20_D, function (req, res) { res.json(euCommand1920D) });
+app.get(process.env.API_EU_COMMAND_20_21_A, function (req, res) { res.json(euCommand2021A) });
+app.get(process.env.API_EU_COMMAND_20_21_B, function (req, res) { res.json(euCommand2021B) });
+app.get(process.env.API_EU_COMMAND_20_21_C, function (req, res) { res.json(euCommand2021C) });
+app.get(process.env.API_EU_COMMAND_20_21_D, function (req, res) { res.json(euCommand2021D) });
 
 app.listen(process.env.PORT);

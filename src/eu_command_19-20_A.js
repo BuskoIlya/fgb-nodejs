@@ -145,7 +145,7 @@ const euCommand1920A = {
     {
       "name": "Тур 1", "date": "2019-10-01",
       "games": [
-        { "cmd_1": "Франция", "cmd_1_flag": "fr.png", "cmd_2": "Германия", "cmd_2_flag": "de.png", "result": " 4 - 0" },
+        { "cmd_1": "Франция", "cmd_1_flag": "fr.png", "cmd_2": "Германия", "cmd_2_flag": "de.png", "result": "4 - 0" },
         { "cmd_1": "Россия", "cmd_1_flag": "ru.png", "cmd_2": "Австрия", "cmd_2_flag": "at.png", "result": "4 - 0" },
         { "cmd_1": "Украина", "cmd_1_flag": "ua.png", "cmd_2": "Польша", "cmd_2_flag": "pl.png", "result": "4 - 0" },
         { "cmd_1": "Румыния", "cmd_1_flag": "ro.png", "cmd_2": "Израиль", "cmd_2_flag": "il.png", "result": "3 - 1" },

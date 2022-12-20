@@ -152,7 +152,7 @@ const euCommand1920D = {
         { "cmd_1": "Марокко", "cmd_1_flag": "ma.png", "cmd_2": "Казахстан", "cmd_2_flag": "kz.png", "result": "0 - 4" },
         { "cmd_1": "Кипр", "cmd_1_flag": "cy.png", "cmd_2": "Португалия", "cmd_2_flag": "pt.png", "result": "3 - 1" },
         { "cmd_1": "Болгария", "cmd_1_flag": "bg.png", "cmd_2": "Беларусь", "cmd_2_flag": "by.png", "result": "2 - 2" },
-        { "cmd_1": "Исландия", "cmd_1_flag": "is.png", "cmd_2": "Испания", "cmd_2_flag": "es.png", "result": "" },
+        { "cmd_1": "Исландия", "cmd_1_flag": "is.png", "cmd_2": "Испания", "cmd_2_flag": "es.png", "result": "1 - 3" },
       ]
     },
     {
