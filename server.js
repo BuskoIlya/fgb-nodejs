@@ -45,4 +45,12 @@ app.get(process.env.API_EU_COMMAND_20_21_D, function (req, res) { res.json(euCom
 app.get(process.env.API_GO_STUDY_STORIES, function (req, res) { res.json(goStudyStories) });
 app.get(process.env.API_GO_STUDY_BOOKS, function (req, res) { res.json(goStudyBooks) });
 
+const allTournaments = require("./src/allTournament.js");
+app.get(
+  process.env.API_TOURNAMENT,
+  function (req, res) {
+    res.json(allTournaments.find((item) => item.id === req.params.id));
+  }
+);
+
 app.listen(process.env.PORT);
