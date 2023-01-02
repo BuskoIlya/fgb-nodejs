@@ -2,9 +2,10 @@ require('dotenv/config');
 const express = require('express');
 const cors = require('cors');
 
+const PlayerController = require('./src/db/PlayerController');
+const TournamentController = require('./src/db/TournamentController');
+
 const tournaments = require("./src/tournaments.js");
-const homeTournaments = require("./src/home_tournaments.js");
-const players = require("./src/players.js");
 const contacts = require("./src/contacts.js");
 const ranks = require("./src/ranks.js");
 const news = require("./src/news.js");
@@ -24,10 +25,14 @@ const goStudyBooks = require("./src/books.js");
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
-app.get(process.env.API_TOURNAMENTS, function (req, res) { res.json(tournaments) });
-app.get(process.env.API_HOME_TOURNAMENTS, function (req, res) { res.json(homeTournaments) });
-app.get(process.env.API_PLAYERS, function (req, res) { res.json(players) });
+//------------------------------------------------------------------------------
+app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
+app.get(process.env.API_TOURNAMENT, TournamentController.getTournamentById);
+app.get(process.env.API_TOURNAMENTS, TournamentController.getTournamentsByYear);
+//------------------------------------------------------------------------------
+
 app.get(process.env.API_CONTACTS, function (req, res) { res.json(contacts) });
 app.get(process.env.API_RANKS, function (req, res) { res.json(ranks) });
 app.get(process.env.API_NEWS, function (req, res) { res.json(news) });
@@ -44,13 +49,5 @@ app.get(process.env.API_EU_COMMAND_20_21_C, function (req, res) { res.json(euCom
 app.get(process.env.API_EU_COMMAND_20_21_D, function (req, res) { res.json(euCommand2021D) });
 app.get(process.env.API_GO_STUDY_STORIES, function (req, res) { res.json(goStudyStories) });
 app.get(process.env.API_GO_STUDY_BOOKS, function (req, res) { res.json(goStudyBooks) });
-
-const allTournaments = require("./src/allTournament.js");
-app.get(
-  process.env.API_TOURNAMENT,
-  function (req, res) {
-    res.json(allTournaments.find((item) => item.id === req.params.id));
-  }
-);
 
 app.listen(process.env.PORT);
