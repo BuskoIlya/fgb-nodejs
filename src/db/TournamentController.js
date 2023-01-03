@@ -1,22 +1,24 @@
 const Tournament = require('./Tournament');
 
 const getAllTournaments = async (req, res) => {
-  Tournament.getAll(async(e, result) => {
-    if (e) {
-      return res.status(404).json({
-        error: 'Не удалось получить данные о турнирах'
-      });
-    } else {
-      res.json(result);
-    }
-  });
+  try {
+    const years = [2018, 2019, 2020, 2021, 2022, 2023];
+    const result = await Promise.all(
+      years.map(async (year) => {
+      const items = await Tournament.getAllByYear(year);
+      return {year, items};
+    }));
+    res.json(result);
+  } catch (e) {
+    return res.status(404).json({
+      error: `Не удалось получить данные о турнирах`
+    });
+  }
 }
 
 const getTournamentsByYear = async (req, res) => {
   try {
-    console.log(2022);
     const result = await Tournament.getAllByYear(req.params.id);
-    console.log(result);
     res.json(result);
   } catch (e) {
     return res.status(404).json({

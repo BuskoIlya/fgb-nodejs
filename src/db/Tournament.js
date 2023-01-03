@@ -1,19 +1,34 @@
 const util = require('util');
 const connection = require('./connection');
 const playerTableName = require('./Player').tableName;
+const addressesTableName = 'addresses';
 
 const tableName = 'tournaments';
 const tournamentTablesTableName = 'tournament_tables';
 const temporaryTableName = 'temporary_table';
 const sqlSetRuTime = 'set lc_time_names = \'ru_RU\';';
 const sqlGelAllTournaments = `select 
-id, img, title, date_format(start_date, '%d %M %Y') as date, address, author 
-from ${tableName} order by start_date desc;
+t.id, t.img, t.title, date_format(t.start_date, '%d %M %Y') as date, t.author, 
+t.color, a.short_address 
+from ${tableName} as t 
+inner join ${addressesTableName} as a on t.address_id=a.id 
+order by t.start_date desc;
 `;
-const sqlGetAllTournamentsByYear = `
-select * from ${tableName} where year(start_date)=%d order by start_date desc
+const sqlGetAllTournaments = `
+select 
+t.id, t.img, t.title, date_format(t.start_date, '%d %M %Y') as date, t.author, 
+t.color, a.short_address 
+from ${tableName} as t 
+inner join ${addressesTableName} as a on t.address_id=a.id 
 `;
-const sqlGetTournamentInfoById = `select * from ${tableName} where id=%d;`;
+const byYear = ` where year(start_date)=%d order by start_date desc;`;
+const sqlGetTournamentInfoById = `
+select t.id, t.title, t.author, date_format(t.start_date, '%d %M %Y') as date, 
+a.short_address, a.long_address, a.city_img 
+from ${tableName} as t 
+inner join ${addressesTableName} as a on t.address_id=a.id 
+`;
+const sqlById = 'where t.id=%d;';
 const sqlGetTablesInfoByTournamentId =
   `select * from ${tournamentTablesTableName} where tournament_id=%d;`;
 const sqlDropTable = 'drop table if exists %s;';
@@ -44,19 +59,19 @@ class Tournament {
 
   static async getAllByYear(year) {
     return new Promise((resolve, reject) => {
-      const sql = util.format(sqlGetAllTournamentsByYear, year);
+      const sql = sqlSetRuTime + sqlGetAllTournaments + util.format(byYear, year);
       connection.query(sql, (e, result) => {
         if (e) {
           return reject(new Error(e));
         }
-        return resolve(result);
+        return resolve(result[1]);
       });
     });
   }
 
   static async getInfoById(id) {
     return new Promise((resolve, reject) => {
-      const sql = util.format(sqlGetTournamentInfoById, id);
+      const sql = sqlGetTournamentInfoById + util.format(sqlById, id);
       connection.query(sql, (e, result) => {
         if (e) {
           return reject(new Error(e));
