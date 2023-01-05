@@ -30,6 +30,8 @@ app.use(express.json());
 //------------------------------------------------------------------------------
 app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
 app.get(process.env.API_TOURNAMENT, TournamentController.getTournamentById);
+app.get(process.env.API_TOURNAMENT_RU, TournamentController.getTournamentRuById);
+app.get(process.env.API_TOURNAMENT_WORLD, TournamentController.getTournamentWorldById);
 app.get(process.env.API_TOURNAMENTS_BY_YEAR, TournamentController.getTournamentsByYear);
 app.get(process.env.API_TOURNAMENTS_ALL, TournamentController.getAllTournaments);
 //------------------------------------------------------------------------------

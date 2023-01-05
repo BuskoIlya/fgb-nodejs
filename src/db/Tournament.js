@@ -9,7 +9,7 @@ const temporaryTableName = 'temporary_table';
 const sqlSetRuTime = 'set lc_time_names = \'ru_RU\';';
 const sqlGelAllTournaments = `select 
 t.id, t.img, t.title, date_format(t.start_date, '%d %M %Y') as date, t.author, 
-t.color, a.short_address 
+t.color, t.toref, a.short_address 
 from ${tableName} as t 
 inner join ${addressesTableName} as a on t.address_id=a.id 
 order by t.start_date desc;
@@ -17,7 +17,7 @@ order by t.start_date desc;
 const sqlGetAllTournaments = `
 select 
 t.id, t.img, t.title, date_format(t.start_date, '%d %M %Y') as date, t.author, 
-t.color, a.short_address 
+t.color, t.toref, a.short_address 
 from ${tableName} as t 
 inner join ${addressesTableName} as a on t.address_id=a.id 
 `;
@@ -39,6 +39,8 @@ from %s as tt
 inner join ${playerTableName} as p on tt.player_id=p.id 
 order by place asc;
 `;
+const sqlGetResultTableRu = `select * from %s;`;
+const sqlGetResultTableWorld = `select * from %s;`;
 const sqlDropIdAndPlayerIdColumnsFromTemporaryTable =
   `alter table ${temporaryTableName} drop column id, drop column player_id;`;
 const sqlGetAllTemporaryData = `select * from ${temporaryTableName};`;
@@ -108,6 +110,32 @@ class Tournament {
           return reject(new Error(e));
         }
         return resolve(result[3]);
+      });
+    });
+  }
+
+  static async getResultTableRuByName(tableName) {
+    const sql = util.format(sqlGetResultTableRu, tableName);
+    return new Promise((resolve, reject) => {
+      connection.query(sql, (e, result) => {
+        if (e) {
+          console.log(`Не удалось получить информацию о результатах таблицы ${tableName}`);
+          return reject(new Error(e));
+        }
+        return resolve(result);
+      });
+    });
+  }
+
+  static async getResultTableWorldByName(tableName) {
+    const sql = util.format(sqlGetResultTableWorld, tableName);
+    return new Promise((resolve, reject) => {
+      connection.query(sql, (e, result) => {
+        if (e) {
+          console.log(`Не удалось получить информацию о результатах таблицы ${tableName}`);
+          return reject(new Error(e));
+        }
+        return resolve(result);
       });
     });
   }
