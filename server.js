@@ -2,10 +2,10 @@ require('dotenv/config');
 const express = require('express');
 const cors = require('cors');
 
+const ContactController = require('./src/db/controllers/ContactController');
 const PlayerController = require('./src/db/controllers/PlayerController');
 const TournamentController = require('./src/db/controllers/TournamentController');
 
-const contacts = require("./src/contacts.js");
 const ranks = require("./src/ranks.js");
 const news = require("./src/news.js");
 const worldChampionships = require("./src/world_championships.js");
@@ -26,6 +26,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get(process.env.API_CONTACTS, ContactController.getAllContacts);
 app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
 app.get(process.env.API_TOURNAMENT, TournamentController.getByTournamentById);
 app.get(process.env.API_TOURNAMENT_RU, TournamentController.getTournamentById);
@@ -34,7 +35,6 @@ app.get(process.env.API_TOURNAMENTS_BY_YEAR, TournamentController.getTournaments
 app.get(process.env.API_TOURNAMENTS_ALL, TournamentController.getAllTournaments);
 
 //------------------------------------------------------------------------------
-app.get(process.env.API_CONTACTS, function (req, res) { res.json(contacts) });
 app.get(process.env.API_RANKS, function (req, res) { res.json(ranks) });
 app.get(process.env.API_NEWS, function (req, res) { res.json(news) });
 app.get(process.env.API_WORLD_CHAMPIONSHIPS, function (req, res) { res.json(worldChampionships) });

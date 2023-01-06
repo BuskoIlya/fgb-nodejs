@@ -23,7 +23,7 @@ where t.id=?
 const SQL_GET_TABLES_INFO_BY_TOURNAMENT_ID = `select * from ${TN_TOURNAMENT_TABLES} where tournament_id=?`;
 const SQL_DROP_TABLE = 'drop table if exists ??';
 const SQL_GET_BELARUS_TOURNAMENT_RESULTS_AS_TEMPORARY = `create temporary table ${TN_TEMPORARY} as 
-select tt.id as place, concat(p.family, ' ', p.name) as player, p.city, tt.* 
+select tt.id as place, concat(p.family, " ", p.name) as player, p.city, tt.* 
 from ?? as tt inner join ${TN_PLAYERS} as p on tt.player_id=p.id 
 order by place asc
 `;
