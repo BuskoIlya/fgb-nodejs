@@ -4,10 +4,9 @@ const cors = require('cors');
 
 const ContactController = require('./src/db/controllers/ContactController');
 const PlayerController = require('./src/db/controllers/PlayerController');
+const RankController = require('./src/db/controllers/RankController');
 const TournamentController = require('./src/db/controllers/TournamentController');
 
-const ranks = require("./src/ranks.js");
-const news = require("./src/news.js");
 const worldChampionships = require("./src/world_championships.js");
 const euPersonal = require("./src/eu_personal.js");
 const euCommand = require("./src/eu_command.js");
@@ -28,6 +27,7 @@ app.use(express.json());
 
 app.get(process.env.API_CONTACTS, ContactController.getAllContacts);
 app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
+app.get(process.env.API_RANKS, RankController.getAllRanks);
 app.get(process.env.API_TOURNAMENT, TournamentController.getByTournamentById);
 app.get(process.env.API_TOURNAMENT_RU, TournamentController.getTournamentById);
 app.get(process.env.API_TOURNAMENT_WORLD, TournamentController.getTournamentById);
@@ -35,8 +35,6 @@ app.get(process.env.API_TOURNAMENTS_BY_YEAR, TournamentController.getTournaments
 app.get(process.env.API_TOURNAMENTS_ALL, TournamentController.getAllTournaments);
 
 //------------------------------------------------------------------------------
-app.get(process.env.API_RANKS, function (req, res) { res.json(ranks) });
-app.get(process.env.API_NEWS, function (req, res) { res.json(news) });
 app.get(process.env.API_WORLD_CHAMPIONSHIPS, function (req, res) { res.json(worldChampionships) });
 app.get(process.env.API_EU_PERSONAL, function (req, res) { res.json(euPersonal) });
 app.get(process.env.API_EU_COMMAND, function (req, res) { res.json(euCommand) });
