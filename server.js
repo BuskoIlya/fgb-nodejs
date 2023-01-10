@@ -9,8 +9,8 @@ const RankController = require('./src/db/controllers/RankController');
 const TournamentController = require('./src/db/controllers/TournamentController');
 const WAGCController = require('./src/db/controllers/WAGCController');
 const EUCommandController = require('./src/db/controllers/EUCommandController');
+const EUPersonalController = require('./src/db/controllers/EUPersonalController');
 
-const euPersonal = require("./src/eu_personal.js");
 const euCommand1920A = require("./src/eu_command_19-20_A.js");
 const euCommand1920B = require("./src/eu_command_19-20_B.js");
 const euCommand1920C = require("./src/eu_command_19-20_C.js");
@@ -28,6 +28,7 @@ app.use(express.json());
 app.get(process.env.API_BOOK, BookController.getBookById);
 app.get(process.env.API_CONTACTS, ContactController.getAllContacts);
 app.get(process.env.API_EU_COMMAND, EUCommandController.getAllEUCommandData);
+app.get(process.env.API_EU_PERSONAL, EUPersonalController.getAllEUPersonalData);
 app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
 app.get(process.env.API_RANKS, RankController.getAllRanks);
 app.get(process.env.API_STUDY_GO_BOOKS, BookController.getAllBooks);
@@ -39,7 +40,6 @@ app.get(process.env.API_TOURNAMENTS_ALL, TournamentController.getAllTournaments)
 app.get(process.env.API_WORLD_CHAMPIONSHIPS, WAGCController.getAllWAGCData);
 
 //------------------------------------------------------------------------------
-app.get(process.env.API_EU_PERSONAL, function (req, res) { res.json(euPersonal) });
 app.get(process.env.API_EU_COMMAND_19_20_A, function (req, res) { res.json(euCommand1920A) });
 app.get(process.env.API_EU_COMMAND_19_20_B, function (req, res) { res.json(euCommand1920B) });
 app.get(process.env.API_EU_COMMAND_19_20_C, function (req, res) { res.json(euCommand1920C) });
