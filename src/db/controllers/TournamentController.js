@@ -53,7 +53,6 @@ const getByTournamentById = async (req, res) => {
 
 const getTournamentById = async (req, res) => {
   try {
-    console.log(req);
     const tournamentInfo = await Tournament.getInfoById(req.params.id);
     const tablesInfo = await Tournament.getTablesInfoById(req.params.id);
     const tables = await Promise.all(
