@@ -1,4 +1,5 @@
 const EUCommandGroups = require('../models/EUCommandGroups');
+const EUCommandGames = require('../models/EUCommandGames');
 
 const getAllGroupResultsByYear = async (req, res) => {
   try {
@@ -20,10 +21,19 @@ const getAllGroupResultsByYear = async (req, res) => {
 
 const getDataByYearAndGroup = async (req, res) => {
   try {
-    const result = await EUCommandGroups.getGroupResultsByYearAndGroup(
-      req.params.year.toString(),
-      req.params.group.toString());
-    return res.json({table: result});
+    const year = req.params.year.toString();
+    const group = req.params.group.toString();
+    const table = await EUCommandGroups.getGroupResultsByYearAndGroup(year, group);
+    const roundsAndDates = await EUCommandGames.getRoundsAndDates(year, group);
+    const rounds = await Promise.all(roundsAndDates.map(async (item) => {
+      const games = await EUCommandGames.getRoundGames(year, group, item.number);
+      return {
+        name: 'Тур ' + item.number,
+        date: item.date,
+        games
+      };
+    }));
+    return res.json({table, rounds});
   } catch (e) {
     console.error(`Не удалось получить данных о группе ${req.params.group} в сезоне ${req.params.year}: ${e}`);
     res.status(404).json({
