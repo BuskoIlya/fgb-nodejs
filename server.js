@@ -25,8 +25,9 @@ app.get(process.env.API_EU_COMMAND_GROUPS_YEAR_GROUP, EUCommandGroupsController.
 app.get(process.env.API_EU_PERSONAL, EUPersonalController.getAllEUPersonalData);
 app.get(process.env.API_PLAYERS, PlayerController.getAllPlayers);
 app.get(process.env.API_RANKS, RankController.getAllRanks);
-app.get(process.env.API_STUDY_GO_STORIES, StoryController.getAllStories);
 app.get(process.env.API_STUDY_GO_BOOKS, BookController.getAllBooks);
+app.get(process.env.API_STUDY_GO_STORIES, StoryController.getAllStories);
+app.get(process.env.API_STUDY_STORY, StoryController.getStoryById);
 app.get(process.env.API_TOURNAMENT, TournamentController.getByTournamentById);
 app.get(process.env.API_TOURNAMENT_RU, TournamentController.getTournamentById);
 app.get(process.env.API_TOURNAMENT_WORLD, TournamentController.getTournamentById);
