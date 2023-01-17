@@ -1,7 +1,6 @@
 const connection = require('../connection');
 
 const TN_COUNTRIES = require('./Country').tableName;
-const TN_NATIONAL_TEAM_GAMES = require('./NationalTeamGame').tableName;
 const TN_NATIONAL_TEAM_PLAYERS = require('./NationalTeamPlayer').tableName;
 const TABLE_NAME = process.env.DB_TN_NATIONAL_PLAYER_GAMES;
 const SQL_SELECT_PLAYER_GAMES_OF_TEAM_GAME = `
@@ -25,8 +24,7 @@ then 1 else 0
 end as score 
 from ${TN_NATIONAL_TEAM_PLAYERS} as ntp 
 inner join ${TABLE_NAME} as npg on npg.black_player_id=ntp.id or npg.white_player_id=ntp.id 
-inner join ${TN_NATIONAL_TEAM_GAMES} as ntg on ?=ntp.country_id 
-where npg.team_game_id=?
+where ?=ntp.country_id and npg.team_game_id=?
 `;
 
 class NationalPlayerGame {

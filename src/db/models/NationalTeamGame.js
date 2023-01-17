@@ -16,6 +16,12 @@ inner join ${TN_COUNTRIES} as c1 on c1.id=ntg.team1
 inner join ${TN_COUNTRIES} as c2 on c2.id=ntg.team2 
 where ntg.id=?
 `;
+const SQL_SELECT_ALL_TEAM_GAMES_BY_YEAR = `
+select tg.id, tg.img, tg.game_title as title, 
+date_format(tg.game_date, "%d %M %Y") as date, tg.author, tg.game_date as order_field 
+from ${TABLE_NAME} as tg 
+where year(game_date)=? order by game_date desc
+`;
 
 class NationalTeamGame {
   static get tableName() {return TABLE_NAME}
@@ -27,6 +33,17 @@ class NationalTeamGame {
           return reject(new Error(e));
         }
         return resolve(result[1][0]);
+      });
+    });
+  }
+
+  static async getAllByYear(year) {
+    return new Promise((resolve, reject) => {
+      connection.query(SQL_SET_RU_TIME + ';' + SQL_SELECT_ALL_TEAM_GAMES_BY_YEAR, year, (e, result) => {
+        if (e) {
+          return reject(new Error(e));
+        }
+        return resolve(result[1]);
       });
     });
   }

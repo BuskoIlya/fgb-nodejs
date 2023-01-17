@@ -18,4 +18,35 @@ const getFullTeamGameDataById = async (req, res) => {
   }
 }
 
+const getNationalTeamGamesByYear = async (req, res) => {
+  try {
+    const result = await NationalTeamGame.getAllByYear(req.params.year);
+    res.json(result);
+  } catch (e) {
+    console.error(`Не удалось получить игры сборных ${req.params.year} года: ${e}`);
+    return res.status(404).json({
+      error: `Не удалось получить игры сборных ${req.params.year} года`
+    });
+  }
+}
+
+const getAllNationalTeamGames = async (req, res) => {
+  try {
+    const years = [2018, 2019, 2020, 2021, 2022, 2023];
+    const result = await Promise.all(
+      years.map(async (year) => {
+        const items = await NationalTeamGame.getAllByYear(year);
+        return {year, items};
+      }));
+    res.json(result);
+  } catch (e) {
+    console.error(`Не удалось получить игры сборных: ${e}`);
+    return res.status(404).json({
+      error: 'Не удалось получить игры сборных'
+    });
+  }
+}
+
 module.exports.getFullTeamGameDataById = getFullTeamGameDataById;
+module.exports.getNationalTeamGamesByYear = getNationalTeamGamesByYear;
+module.exports.getAllNationalTeamGames = getAllNationalTeamGames;

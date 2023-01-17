@@ -10,7 +10,7 @@ const SQL_SELECT_ALL = `select * from ??`;
 const SQL_SET_RU_TIME = 'set lc_time_names = "ru_RU"';
 const SQL_SELECT_ALL_TOURNAMENTS = `
 select t.id, t.img, t.title, date_format(t.start_date, "%d %M %Y") as date, t.author, 
-t.color, t.toref, a.short_address 
+t.color, t.toref, a.short_address, t.start_date as order_field 
 from ${TABLE_NAME} as t inner join ${TN_ADDRESSES} as a on t.address_id=a.id 
 where year(start_date)=? order by start_date desc
 `;
