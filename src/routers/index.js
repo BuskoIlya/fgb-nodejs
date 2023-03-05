@@ -3,7 +3,7 @@ const router = new Router();
 
 const infoRouter = require('./infoRouter');
 const playersRouter = require('./playersRouter');
-const studyRouter = require('./studyRoute');
+const studyRouter = require('./studyRouter');
 const tournamentsRouter = require('./tournamentsRouter');
 const userRouter = require('./userRouter');
 
