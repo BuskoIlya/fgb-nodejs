@@ -8,7 +8,7 @@ const checkToken = (req, res, next) => {
     return res.status(403).json({error: 'Нет доступа'});
   }
   try {
-    const {id} = jwt.verify(token, process.env.AUTH_SECRET);
+    const { id } = jwt.verify(token, process.env.AUTH_SECRET);
     req.id = id;
     next();
   } catch (e) {
@@ -17,12 +17,21 @@ const checkToken = (req, res, next) => {
   }
 }
 
-const getCookieOptions = () => {
+const getCookieLoginOptions = () => {
   return {
-    httpOnly: false,
-    maxAge: 1000000,
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24,
     path: '/',
-    sameSite: 'none',
+    sameSite: 'Strict',
+  };
+}
+
+const getCookieLogoutOptions = () => {
+  return {
+    httpOnly: true,
+    maxAge: 0,
+    path: '/',
+    sameSite: 'Strict',
   };
 }
 
@@ -33,5 +42,6 @@ const getHash = async (data) => {
 }
 
 module.exports.checkToken = checkToken;
-module.exports.getCookieOptions = getCookieOptions;
+module.exports.getCookieLoginOptions = getCookieLoginOptions;
+module.exports.getCookieLogoutOptions = getCookieLogoutOptions;
 module.exports.getHash = getHash;

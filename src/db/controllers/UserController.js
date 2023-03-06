@@ -7,26 +7,18 @@ const util = require('../../utils/util');
 
 const getMe = async (req, res) => {
   try {
-    console.log(`req.id = ${req.id}`);
     const user = await User.getById(req.id);
     if (!user) {
       console.error(`Ошибка 404. Пользователь с id ${req.id} не найден`);
-      return res.status(400).json({
-        error: 'Пользователь не найден'
-      });
+      return res.status(400).json({ error: 'Пользователь не найден' });
     }
 
     console.log(`Пользователь с id ${req.id} найден`);
-    const {passwordHash, ...userData} = user;
-    res.json({
-      fullName: util.fullName(user.family, user.name, user.father),
-      ...userData
-    });
+    const { passwordHash, ...userData } = user;
+    res.json({ fullName: util.fullName(user.family, user.name, user.father), ...userData });
   } catch (e) {
     console.error(`Ошибка 5xx: ${e}`);
-    return res.status(500).json({
-      error: 'Нет доступа'
-    });
+    return res.status(500).json({ error: 'Нет доступа' });
   }
 }
 
@@ -36,23 +28,19 @@ const login = async (req, res) => {
     const user = await User.getByEmail(email);
     if (!user) {
       console.error(`Ошибка 404. Пользователь ${email} не существует`);
-      return res.status(400).json({
-        error: 'Неверный логин или пароль'
-      });
+      return res.status(400).json({ error: 'Неверный логин или пароль' });
     }
 
     const password = req.body.password;
     const isValid = await bcrypt.compare(password, user.passwordHash);
     if (!isValid) {
       console.error(`Ошибка 401. Неверный пароль ${password} для пользователя ${email}`);
-      return res.status(400).json({
-        error: 'Неверный логин или пароль'
-      });
+      return res.status(400).json({ error: 'Неверный логин или пароль' });
     }
 
     console.log(`Пользователь ${email} авторизован`);
-    const token = jwt.sign({id: user.id}, process.env.AUTH_SECRET);
-    res.cookie('token', token, auth.getCookieOptions());
+    const token = jwt.sign({ id: user.id }, process.env.AUTH_SECRET);
+    res.cookie('token', token, auth.getCookieLoginOptions());
     res.json({
       fullName: util.fullName(user.family, user.name, user.father),
       img: user.img,
@@ -61,9 +49,17 @@ const login = async (req, res) => {
     });
   } catch (e) {
     console.error(`Не удалось авторизоваться: ${e}`);
-    return res.status(500).json({
-      error: 'Неверный логин или пароль'
-    });
+    return res.status(500).json({ error: 'Неверный логин или пароль' });
+  }
+}
+
+const logout = async (req, res) => {
+  try {
+    res.cookie('token', '', auth.getCookieLogoutOptions());
+    res.send();
+  } catch (e) {
+    console.error(`Не удалось выйти: ${e}`);
+    return res.status(500).json({ error: 'Не удалось выйти' });
   }
 }
 
@@ -73,24 +69,19 @@ const register = async (req, res) => {
     let user = await User.getByEmail(email);
     if (user) {
       console.error(`Ошибка 400. Не удалось зарегистрироваться: пользователь ${email} существует`);
-      return res.status(400).json({
-        error: 'Не удалось зарегистрироваться'
-      });
+      return res.status(400).json({ error: 'Не удалось зарегистрироваться' });
     }
 
     await User.register(email, await auth.getHash(req.body.password));
     console.log(`Пользователь ${email} зарегистрирован`);
 
     user = await User.getByEmail(email);
-    const token = jwt.sign({id: user.id}, process.env.AUTH_SECRET);
-    res.cookie('token', token, auth.getCookieOptions());
-    console.log(res.cookies);
+    const token = jwt.sign({ id: user.id }, process.env.AUTH_SECRET);
+    res.cookie('token', token, auth.getCookieLoginOptions());
     res.json({token});
   } catch (e) {
     console.error(`Не удалось зарегистрироваться: ${e}`);
-    return res.status(500).json({
-      error: 'Не удалось зарегистрироваться'
-    });
+    return res.status(500).json({ error: 'Не удалось зарегистрироваться' });
   }
 }
 
@@ -109,16 +100,15 @@ const update = async (req, res) => {
     }
     await User.update(newData);
     console.log(`Данные пользователя с id ${req.id} обновлены`);
-    res.json({success: true});
+    res.json({ success: true });
   } catch (e) {
     console.error(`Ошибка 5xx. Не удалось обновить данные пользователя: ${e}`);
-    return res.status(500).json({
-      error: 'Не удалось обновить данные пользователя'
-    });
+    return res.status(500).json({ error: 'Не удалось обновить данные пользователя' });
   }
 }
 
 module.exports.getMe = getMe;
 module.exports.login = login;
+module.exports.logout = logout;
 module.exports.register = register;
 module.exports.update = update;
