@@ -6,7 +6,10 @@ const router = require('./src/routers');
 
 const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true 
+}));
 app.use(express.json());
 
 app.use(process.env.API, router);

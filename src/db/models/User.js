@@ -1,71 +1,31 @@
-const connection = require('../connection');
+module.exports.getByEmail = getByEmail;
+module.exports.getById = getById;
+module.exports.register = register;
+module.exports.update = update;
 
+const query = require('../../utils/query');
 const TABLE_NAME = process.env.DB_TN_USERS;
-const SQL_GET_BY_ID = `select * from ${TABLE_NAME} where id=?`;
+const SQL_GET_BY_ID = `
+select email, passwordHash, 
+ifnull(family, '') as family, ifnull(name, '') as name, 
+ifnull(father, '') as father, ifnull(birthdate, '') as birthdate, 
+ifnull(city, '') as city, ifnull(isPlayer, false) as isPlayer 
+from ${TABLE_NAME} where id=?
+`;
 const SQL_GET_BY_EMAIL = `select * from ${TABLE_NAME} where email=?`;
 const SQL_REGISTER = `insert into ${TABLE_NAME} (email, passwordHash) values(?, ?)`;
-const SQL_UPDATE = `
-update ${TABLE_NAME} 
-set email=?, passwordHash=?, family=?, name=?, father=?, 
-birthdate=?, city=?, img=?, isPlayer=? 
-where id=?
-`;
 
-class User {
-  static get tableName() {return TABLE_NAME}
-
-  static async getById(id) {
-    return new Promise((resolve, reject) => {
-      connection.query(SQL_GET_BY_ID, id, (e, result) => {
-        if (e) {
-          return reject(new Error(e));
-        }
-        return resolve(result[0]);
-      })
-    });
-  }
-
-  static async getByEmail(email) {
-    return new Promise((resolve, reject) => {
-      connection.query(SQL_GET_BY_EMAIL, email, (e, result) => {
-        if (e) {
-          return reject(new Error(e));
-        }
-        return resolve(result[0]);
-      })
-    });
-  }
-
-  static async register(email, passwordHash) {
-    return new Promise((resolve, reject) => {
-      connection.query(SQL_REGISTER, [email, passwordHash], (e, result) => {
-        if (e) {
-          return reject(new Error(e));
-        }
-        return resolve(result);
-      })
-    });
-  }
-
-  static async update(
-    {
-      id, email, passwordHash,
-      family, name, father,
-      birthdate, city, img, isPlayer
-    })
-  {
-    return new Promise((resolve, reject) => {
-      connection.query(
-        SQL_UPDATE,
-        [email, passwordHash, family, name, father, birthdate, city, img, isPlayer, id],
-        (e, result) => {
-        if (e) {
-          return reject(new Error(e));
-        }
-        return resolve(result);
-      })
-    });
-  }
+async function getByEmail(email) {
+  return (await query.execute(SQL_GET_BY_EMAIL, [email]))[0];
+}
+async function getById(id) {
+  return (await query.execute(SQL_GET_BY_ID, [id]))[0];
 }
 
-module.exports = User;
+async function register(email, passwordHash) {
+  return query.execute(SQL_REGISTER, [email, passwordHash]);
+}
+
+async function update(newData, id) {
+  return query.execute(`update ${TABLE_NAME} set ${newData} where id=${id}`);
+}
