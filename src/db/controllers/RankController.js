@@ -5,7 +5,7 @@ const getAllRanks = async(req, res) => {
     if (e) {
       console.error(`Не удалось получить данные о разрядах: ${e}`);
       return res.status(404).json({
-        error: 'Не удалось получить данные о разрядах'
+        message: 'Не удалось получить данные о разрядах'
       });
     } else {
       res.json(result);

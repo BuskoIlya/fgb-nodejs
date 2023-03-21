@@ -5,7 +5,7 @@ const getAllPlayers = async(req, res) => {
     if (e) {
       console.error(`Не удалось получить данные об игроках: ${e}`);
       return res.status(404).json({
-        error: 'Не удалось получить данные об игроках'
+        message: 'Не удалось получить данные об игроках'
       });
     } else {
       res.json(result);

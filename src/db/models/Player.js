@@ -1,8 +1,9 @@
 const connection = require('../connection');
 
 const TABLE_NAME = process.env.DB_TN_PLAYERS;
-const SQL_SELECT_ALL_PLAYERS = `select concat(family, " ", name, " ", ifnull(father, "")) as fio, 
-city, sport_rank, score from ${TABLE_NAME} order by score desc`;
+const SQL_SELECT_ALL_PLAYERS = `
+select concat(family, " ", name, " ", ifnull(father, "")) as fullName, 
+city, sport_rank as sportRank, score from ${TABLE_NAME} order by score desc`;
 
 class Player {
   static get tableName() {return TABLE_NAME}

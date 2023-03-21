@@ -7,7 +7,7 @@ const getAllWAGCData = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о чемпионатах мира: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить данные о чемпионатах мира'
+      message: 'Не удалось получить данные о чемпионатах мира'
     });
   }
 }
