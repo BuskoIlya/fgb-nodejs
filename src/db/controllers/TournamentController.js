@@ -13,7 +13,7 @@ const getAllTournaments = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о турнирах: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить данные о турнирах'
+      message: 'Не удалось получить данные о турнирах'
     });
   }
 }
@@ -25,7 +25,7 @@ const getTournamentsByYear = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить турниры ${req.params.year} года: ${e}`);
     return res.status(404).json({
-      error: `Не удалось получить турниры ${req.params.year} года`
+      message: `Не удалось получить турниры ${req.params.year} года`
     });
   }
 }
@@ -46,7 +46,7 @@ const getByTournamentById = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о турнире: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить данные о турнире'
+      message: 'Не удалось получить данные о турнире'
     });
   }
 }
@@ -74,7 +74,7 @@ const getTournamentById = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о турнире: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить данные о турнире'
+      message: 'Не удалось получить данные о турнире'
     });
   }
 }

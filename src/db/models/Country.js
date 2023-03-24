@@ -1,7 +1,7 @@
 const connection = require('../connection');
 
 const TABLE_NAME = process.env.DB_TN_COUNTRIES;
-const SQL_SELECT_ALL_COUNTRIES = `select * from ${TABLE_NAME}`;
+const SQL_SELECT_ALL_COUNTRIES = `select id, name, flag_img as flagImg from ${TABLE_NAME}`;
 
 class Country {
   static get tableName() {return TABLE_NAME}

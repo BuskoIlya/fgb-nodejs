@@ -24,7 +24,7 @@ const getAllNews = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о событиях: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить данные о событиях'
+      message: 'Не удалось получить данные о событиях'
     });
   }
 }

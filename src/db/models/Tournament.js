@@ -10,17 +10,20 @@ const SQL_SELECT_ALL = `select * from ??`;
 const SQL_SET_RU_TIME = 'set lc_time_names = "ru_RU"';
 const SQL_SELECT_ALL_TOURNAMENTS = `
 select t.id, t.img, t.title, date_format(t.start_date, "%d %M %Y") as date, t.author, 
-t.color, t.toref, a.short_address, t.start_date as order_field 
+t.color, t.toref, a.short_address as shortAddress, t.start_date as order_field 
 from ${TABLE_NAME} as t inner join ${TN_ADDRESSES} as a on t.address_id=a.id 
 where year(start_date)=? order by start_date desc
 `;
 const SQL_GET_TOURNAMENT_INFO_BY_ID = `
 select t.id, t.title, t.author, date_format(t.start_date, "%d %M %Y") as date, 
-a.short_address, a.long_address, a.city_img 
+a.short_address as shortAddress, a.long_address as longAddress, a.city_img as cityImg 
 from ${TABLE_NAME} as t inner join ${TN_ADDRESSES} as a on t.address_id=a.id 
 where t.id=?
 `;
-const SQL_GET_TABLES_INFO_BY_TOURNAMENT_ID = `select * from ${TN_TOURNAMENT_TABLES} where tournament_id=?`;
+const SQL_GET_TABLES_INFO_BY_TOURNAMENT_ID = `
+select name, column_names as columnNames, title 
+from ${TN_TOURNAMENT_TABLES} where tournament_id=?
+`;
 const SQL_DROP_TABLE = 'drop table if exists ??';
 const SQL_GET_BELARUS_TOURNAMENT_RESULTS_AS_TEMPORARY = `create temporary table ${TN_TEMPORARY} as 
 select tt.id as place, concat(p.family, " ", p.name) as player, p.city, tt.* 

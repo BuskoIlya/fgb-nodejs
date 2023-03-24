@@ -5,7 +5,7 @@ const getAllBooks = async(req, res) => {
     if (e) {
       console.error(`Не удалось получить данные о книгах: ${e}`);
       return res.status(404).json({
-        error: 'Не удалось получить данные о книгах'
+        message: 'Не удалось получить данные о книгах'
       });
     } else {
       res.json(result);
@@ -20,7 +20,7 @@ const getBookById = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить книгу ${req.params.id}: ${e}`);
     return res.status(404).json({
-      error: `Не удалось получить книгу`
+      message: `Не удалось получить книгу`
     });
   }
 }

@@ -13,7 +13,7 @@ const getFullTeamGameDataById = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить данные о б игре сборных ${req.params.id}: ${e}`);
     res.status(404).json({
-      error: `Не удалось получить данные о б игре сборных`
+      message: `Не удалось получить данные о б игре сборных`
     })
   }
 }
@@ -25,7 +25,7 @@ const getNationalTeamGamesByYear = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить игры сборных ${req.params.year} года: ${e}`);
     return res.status(404).json({
-      error: `Не удалось получить игры сборных ${req.params.year} года`
+      message: `Не удалось получить игры сборных ${req.params.year} года`
     });
   }
 }
@@ -42,7 +42,7 @@ const getAllNationalTeamGames = async (req, res) => {
   } catch (e) {
     console.error(`Не удалось получить игры сборных: ${e}`);
     return res.status(404).json({
-      error: 'Не удалось получить игры сборных'
+      message: 'Не удалось получить игры сборных'
     });
   }
 }

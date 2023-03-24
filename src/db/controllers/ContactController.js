@@ -5,7 +5,7 @@ const getAllContacts = async(req, res) => {
     if (e) {
       console.error(`Не удалось получить данные о контактах: ${e}`);
       return res.status(404).json({
-        error: 'Не удалось получить данные о контактах'
+        message: 'Не удалось получить данные о контактах'
       });
     } else {
       res.json(result);
