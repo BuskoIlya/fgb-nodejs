@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const express = require('express');
 const router = require('./src/routers');
+const { errorMiddleware } = require('./src/middleware');
 
 const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -11,6 +12,7 @@ app.use(cors({
   credentials: true 
 }));
 app.use(express.json());
+app.use(errorMiddleware);
 
 app.use(process.env.API, router);
 app.get('/*', (req, res) => {

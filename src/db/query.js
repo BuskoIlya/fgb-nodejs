@@ -1,6 +1,6 @@
 module.exports.execute = execute;
 
-const connection = require('../db/connection');
+const connection = require('./connection');
 
 async function execute(sql, params) {
   return new Promise((resolve, reject) => {
