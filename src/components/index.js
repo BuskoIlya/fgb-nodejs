@@ -1,2 +1,5 @@
-module.exports.booksController = require('./books');
-module.exports.userController = require('./user');
+module.exports = {
+  booksController: require('./books'),
+  ranksController: require('./ranks'),
+  userController: require('./user')
+};
