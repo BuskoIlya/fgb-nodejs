@@ -1,1 +1,2 @@
-module.exports = require('./user');
+module.exports.booksController = require('./books');
+module.exports.userController = require('./user');

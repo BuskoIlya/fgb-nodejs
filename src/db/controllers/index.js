@@ -1,4 +1,3 @@
-module.exports.BookController = require('./BookController');
 module.exports.ContactController = require('./ContactController');
 module.exports.EUCommandController = require('./EUCommandController');
 module.exports.EUCommandGroupsController = require('./EUCommandGroupsController');
