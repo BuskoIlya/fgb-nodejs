@@ -3,19 +3,19 @@ const router = new Router();
 
 const {
   EUCommandGroupsController,
-  EUPersonalController,
   NationalTeamGameController,
   TournamentController
 } = require('../db/controllers');
 
 const {
   eucommandController,
+  eupersonalController,
   wagcController
 } = require('../components');
 
 router.get('/', TournamentController.getAllTournaments);
-router.get(process.env.API_TOURNAMENTS_EU_COMMAND, eucommandController.getAllEUCommandData);
-router.get(process.env.API_TOURNAMENTS_EU_PERSONAL, EUPersonalController.getAllEUPersonalData);
+router.get(process.env.API_TOURNAMENTS_EU_COMMAND, eucommandController.getAllEuCommandData);
+router.get(process.env.API_TOURNAMENTS_EU_PERSONAL, eupersonalController.getAllEuPersonalData);
 router.get(
   process.env.API_TOURNAMENTS_NATIONAL_TEAM_GAMES,
   NationalTeamGameController.getAllNationalTeamGames
