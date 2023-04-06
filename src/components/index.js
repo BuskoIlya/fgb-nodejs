@@ -5,10 +5,12 @@ module.exports = {
   eucommandController: require('./eucommand'),
   eucommandGroupsController: require('./eucommand-group'),
   eupersonalController: require('./eupersonal'),
-  nationalTeamGameController: require('./national-team-game'),
+  nationalTeamGameController: require('./national-team-game').nationalTeamGameController,
+  newsController: require('./news'),
   playersController: require('./players'),
   ranksController: require('./ranks'),
   storiesController: require('./stories'),
+  tournamentController: require('./tournament').tournamentController,
   userController: require('./user'),
   wagcController: require('./wagc')
 };

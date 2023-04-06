@@ -1,1 +1,4 @@
-module.exports = require('./nationalTeamGameController');
+module.exports = {
+  nationalTeamGameModel: require('./nationalTeamGameModel'),
+  nationalTeamGameController: require('./nationalTeamGameController')
+};
