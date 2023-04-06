@@ -1,7 +1,7 @@
 module.exports = { getAllNews };
 
 const { ApiError } = require('../../exceptions');
-const util = require('../../utils/util');
+const { objectService } = require('../../services');
 const { nationalTeamGameModel } = require('../national-team-game');
 const { tournamentModel } = require('../tournament');
 
@@ -26,7 +26,7 @@ async function getAllNews() {
         x.ref = x.toref ? `/tournament/${x.toref}` : `/tournament/${x.id}`;
       });
       const items = [...games, ...tournaments];
-      items.sort(util.decreaseByStrField('order_field'));
+      items.sort(objectService.decreaseByStrField('order_field'));
       return { year, items };
     }));
   return result;

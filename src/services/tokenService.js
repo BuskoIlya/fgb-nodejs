@@ -1,7 +1,9 @@
-module.exports.generateToken = generateToken;
-module.exports.getCookieLoginOptions = getCookieLoginOptions;
-module.exports.getCookieLogoutOptions = getCookieLogoutOptions;
-module.exports.validateToken = validateToken;
+module.exports = {
+  generateToken,
+  getCookieLoginOptions,
+  getCookieLogoutOptions,
+  validateToken
+};
 
 const jwt = require('jsonwebtoken');
 
