@@ -1,6 +1,6 @@
 module.exports = { getAll, getById };
 
-const query = require('../../db/query');
+const { query } = require('../../db');
 
 const TABLE = process.env.DB_TN_BOOKS;
 const SQL_GET_ALL_BOOKS = `select * from ${TABLE} order by id asc`;

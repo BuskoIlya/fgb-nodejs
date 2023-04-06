@@ -1,4 +1,4 @@
-module.exports.execute = execute;
+module.exports = { execute };
 
 const connection = require('./connection');
 

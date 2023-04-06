@@ -1,6 +1,6 @@
 module.exports = { getAll };
 
-const query = require('../../db/query');
+const { query } = require('../../db');
 
 const TABLE = process.env.DB_TN_RANKS;
 const SQL_GET_ALL_RANKS = `

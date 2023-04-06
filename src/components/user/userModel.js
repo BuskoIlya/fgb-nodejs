@@ -1,6 +1,6 @@
 module.exports = { create, getByEmail, getById, update };
 
-const query = require('../../db/query');
+const { query } = require('../../db');
 
 const TABLE = process.env.DB_TN_USERS;
 const SQL_CREATE = `insert into ${TABLE} (email, password) values(?, ?)`;

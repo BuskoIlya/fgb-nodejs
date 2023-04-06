@@ -1,6 +1,6 @@
 module.exports = { getAll };
 
-const query = require('../../db/query');
+const { query } = require('../../db');
 
 const PLAYERS_TABLE = process.env.DB_TN_PLAYERS;
 const TABLE = process.env.DB_TN_CONTACTS;
