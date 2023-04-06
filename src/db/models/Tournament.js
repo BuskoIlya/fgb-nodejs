@@ -1,6 +1,6 @@
 const connection = require('../connection');
 
-const TN_PLAYERS = require('./Player').tableName;
+const PLAYERS_TABLE = process.env.DB_TN_PLAYERS;
 const TN_ADDRESSES = process.env.DB_TN_ADDRESSES;
 const TABLE_NAME = process.env.DB_TN_TOURNAMENTS;
 const TN_TOURNAMENT_TABLES = process.env.DB_TN_TOURNAMENT_TABLES;
@@ -27,7 +27,7 @@ from ${TN_TOURNAMENT_TABLES} where tournament_id=?
 const SQL_DROP_TABLE = 'drop table if exists ??';
 const SQL_GET_BELARUS_TOURNAMENT_RESULTS_AS_TEMPORARY = `create temporary table ${TN_TEMPORARY} as 
 select tt.id as place, concat(p.family, " ", p.name) as player, p.city, tt.* 
-from ?? as tt inner join ${TN_PLAYERS} as p on tt.player_id=p.id 
+from ?? as tt inner join ${PLAYERS_TABLE} as p on tt.player_id=p.id 
 order by place asc
 `;
 const SQL_DROP_ID_AND_PLAYERID_FROM_TEMPORARY =

@@ -3,6 +3,5 @@ module.exports.EUCommandGroupsController = require('./EUCommandGroupsController'
 module.exports.EUPersonalController = require('./EUPersonalController');
 module.exports.NationalTeamGameController = require('./NationalTeamGameController');
 module.exports.NewsController = require('./NewsController');
-module.exports.PlayerController = require('./PlayerController');
 module.exports.TournamentController = require('./TournamentController');
 module.exports.WAGCController = require('./WAGCController');

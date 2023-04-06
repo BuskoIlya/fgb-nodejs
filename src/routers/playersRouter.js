@@ -1,7 +1,8 @@
 const Router = require('express');
 const router = new Router();
-const {PlayerController} = require('../db/controllers');
 
-router.get('/', PlayerController.getAllPlayers);
+const { playersController } = require('../components');
+
+router.get('/', playersController.getAllPlayers);
 
 module.exports = router;
