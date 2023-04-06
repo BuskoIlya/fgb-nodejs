@@ -1,7 +1,7 @@
 const connection = require('../connection');
 
 const TN_PLAYERS = require('./Player').tableName;
-const TN_ADDRESSES = require('./Address').tableName;
+const TN_ADDRESSES = process.env.DB_TN_ADDRESSES;
 const TABLE_NAME = process.env.DB_TN_TOURNAMENTS;
 const TN_TOURNAMENT_TABLES = process.env.DB_TN_TOURNAMENT_TABLES;
 const TN_TEMPORARY = process.env.DB_TN_TEMPORARY;

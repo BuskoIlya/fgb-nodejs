@@ -1,5 +1,5 @@
 const Tournament = require('../models/Tournament');
-const Country = require('../models/Country');
+const { countriesModel } = require('../../components');
 
 const getAllTournaments = async (req, res) => {
   try {
@@ -60,7 +60,7 @@ const getTournamentById = async (req, res) => {
         async (item) => {
           const result = await Tournament.getResultsByName(item.name);
           if (req.url.includes('world')) {
-            const countries = await Country.getAll();
+            const countries = await countriesModel.getAll();
             result.forEach(item => {
               const country = countries.find(c => c.id === item.country);
               item.country = country;

@@ -1,6 +1,6 @@
 const connection = require('../connection');
 
-const TN_COUNTRIES = require('./Country').tableName;
+const COUNTRIES_TABLE = process.env.DB_TN_COUNTRIES;
 const TABLE_NAME = process.env.DB_TN_EU_COMMAND_GAMES;
 const SQL_SET_RU_TIME = 'set lc_time_names = "ru_RU"';
 const SQL_GET_ROUNDS_COUNT = `
@@ -17,8 +17,8 @@ select e.result,
 c1.name as cmd_1, c1.flag_img as cmd_1_flag, 
 c2.name as cmd_2, c2.flag_img as cmd_2_flag 
 from ${TABLE_NAME} as e 
-inner join ${TN_COUNTRIES} as c1 on c1.id=e.cmd1_id 
-inner join ${TN_COUNTRIES} as c2 on c2.id=e.cmd2_id 
+inner join ${COUNTRIES_TABLE} as c1 on c1.id=e.cmd1_id 
+inner join ${COUNTRIES_TABLE} as c2 on c2.id=e.cmd2_id 
 where e.year=? and e.group_name=? and e.round_number=? 
 order by e.id asc
 `;
