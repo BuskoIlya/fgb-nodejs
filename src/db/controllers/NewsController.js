@@ -1,5 +1,5 @@
 const util = require('../../util');
-const NationalTeamGame = require('../models/NationalTeamGame');
+const NationalTeamGame = require('../../components/national-team-game/nationalTeamGameModel');
 const Tournament = require('../models/Tournament');
 
 const getAllNews = async (req, res) => {

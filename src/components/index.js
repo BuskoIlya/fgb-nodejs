@@ -5,6 +5,7 @@ module.exports = {
   eucommandController: require('./eucommand'),
   eucommandGroupsController: require('./eucommand-group'),
   eupersonalController: require('./eupersonal'),
+  nationalTeamGameController: require('./national-team-game'),
   playersController: require('./players'),
   ranksController: require('./ranks'),
   storiesController: require('./stories'),
