@@ -1,15 +1,16 @@
-const WAGC = require('../models/WAGC');
+module.exports = { getAllWAGCData };
 
-const getAllWAGCData = async (req, res) => {
+const {ApiError} = require('../../exceptions');
+const wagcModel = require('./wagcModel');
+
+async function getAllWAGCData(req, res, next) {
   try {
-    const result = await WAGC.getAll();
+    const result = await wagcModel.getAll();
+    if (!result) {
+      next(ApiError.BadRequest('Не удалось получить данные о чемпионатах мира'));
+    }
     res.json(result);
   } catch (e) {
-    console.error(`Не удалось получить данные о чемпионатах мира: ${e}`);
-    return res.status(404).json({
-      message: 'Не удалось получить данные о чемпионатах мира'
-    });
+    next(e);
   }
 }
-
-module.exports.getAllWAGCData = getAllWAGCData;
