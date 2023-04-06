@@ -2,13 +2,13 @@ const Router = require('express');
 const router = new Router();
 
 const {
-  EUCommandGroupsController,
   NationalTeamGameController,
   TournamentController
 } = require('../db/controllers');
 
 const {
   eucommandController,
+  eucommandGroupsController,
   eupersonalController,
   wagcController
 } = require('../components');
@@ -25,11 +25,11 @@ router.get(process.env.API_TOURNAMENTS_BY_ID, TournamentController.getByTourname
 router.get(process.env.API_TOURNAMENTS_BY_YEAR, TournamentController.getTournamentsByYear);
 router.get(
   process.env.API_TOURNAMENTS_EU_COMMAND_GROUPS_BY_YEAR,
-  EUCommandGroupsController.getAllGroupResultsByYear
+  eucommandGroupsController.getAllGroupResultsByYear
 );
 router.get(
   process.env.API_TOURNAMENTS_EU_COMMAND_GROUPS_BY_YEAR_BY_GROUP,
-  EUCommandGroupsController.getDataByYearAndGroup
+  eucommandGroupsController.getDataByYearAndGroup
 );
 router.get(
   process.env.API_TOURNAMENTS_NATIONAL_TEAM_GAME,
